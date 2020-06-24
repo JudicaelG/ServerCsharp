@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WCFContract
 {
-    public class Class1
+    interface IServer
     {
+        void service(STCMSG msg);
     }
 }
