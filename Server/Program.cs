@@ -26,6 +26,7 @@ namespace Server
             {
                 host.Open();
                 Console.WriteLine("<--Serveur ouvert-->");
+                
 
                 for (i = 0; i < host.Description.Endpoints.Count; i++)
                 {
@@ -43,12 +44,14 @@ namespace Server
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                Console.Read();
             }
             finally
             {
                 Console.WriteLine("<--Fin de l'initialisation-->");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n" + host.State.ToString());
+                Console.Read();
             }
         }
     }

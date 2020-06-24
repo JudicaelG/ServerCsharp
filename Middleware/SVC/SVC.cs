@@ -18,7 +18,7 @@ namespace Middleware.SVC
             this.m_service = null;
         }
 
-
+        [System.Security.Permissions.PrincipalPermission(System.Security.Permissions.SecurityAction.Demand,Role =@"BUILTIN\Utilisateurs")]
         public STCMSG service(STCMSG message)
         {
             int i;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WCFContract
 {
-    [System.ServiceModel.ServiceContract(Name="IcomposantService", Namespace="http://localhost")]
+    [System.ServiceModel.ServiceContract]
     public interface IServer
     {
         [System.ServiceModel.OperationContract]
