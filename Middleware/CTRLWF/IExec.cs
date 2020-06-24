@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WCFContract;
 
-namespace WCFContract
+namespace Middleware.CTRLWF
 {
-    public interface IServer
+    interface IExec
     {
-        STCMSG service(STCMSG msg);
+        STCMSG exec(STCMSG message);
     }
 }
