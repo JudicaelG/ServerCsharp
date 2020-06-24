@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="CAD\CAD.cs" />
     <Compile Include="CAM\CAM.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="CMPGE\CMPGE_User.cs" />
     <Compile Include="CTRLWF\Auth_V1.cs" />
     <Compile Include="CTRLWF\IExec.cs" />

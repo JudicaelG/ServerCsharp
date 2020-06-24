@@ -1,22 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WCFContract
 {
+    [DataContract]
     public struct STCMSG
     {
+        [System.Runtime.Serialization.DataMember]
         string app_name;
+        [System.Runtime.Serialization.DataMember]
         string app_token;
+        [System.Runtime.Serialization.DataMember]
         string app_version;
+        [System.Runtime.Serialization.DataMember]
         object[] data;
+        [System.Runtime.Serialization.DataMember]
         string op_info;
+        [System.Runtime.Serialization.DataMember]
         string op_name;
+        [System.Runtime.Serialization.DataMember]
         bool op_statut;
+        [System.Runtime.Serialization.DataMember]
         string user_login;
+        [System.Runtime.Serialization.DataMember]
         string user_psw;
+        [System.Runtime.Serialization.DataMember]
         string user_token;
 
         public string App_name { get => app_name; set => app_name = value; }

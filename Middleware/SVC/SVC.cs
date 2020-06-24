@@ -7,7 +7,7 @@ using WCFContract;
 
 namespace Middleware.SVC
 {
-    class SVC: IServer
+    public class SVC: IServer
     {
         private STCMSG message;
         private object m_service;
