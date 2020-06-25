@@ -35,7 +35,7 @@ namespace Middleware.CTRLWF
             {
                 this.message.Op_info = "Success";
                 this.message.Op_statut = true;
-                this.message.User_token = "12345";
+                this.message.User_token = "1234";
             }
             else
             {
@@ -48,7 +48,6 @@ namespace Middleware.CTRLWF
             this.message.App_version = null;
             this.message.Data = null;
             this.message.Op_name = null;
-            this.message.User_login = null;
             this.message.User_psw = null;
 
             return this.message;

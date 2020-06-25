@@ -27,7 +27,7 @@ namespace Middleware.CAD
             this.dataAdapter = new SqlDataAdapter();
             this.dataSet = new DataSet();
 
-            this.sqlConnectionString = @"Data Source=TOUR-JUDI\oeild; initial Catalog=ProjetC#; User ID=DB_WCF;Password=DB_WCF";
+            this.sqlConnectionString = @"Data Source=TOUR-JUDI; initial Catalog=ProjetC#; User ID=DB_WCF;Password=DB_WCF";
             this.sqlConnection.ConnectionString = this.sqlConnectionString;
             this.sqlCommand.CommandType = CommandType.Text;
             this.sqlCommand.Connection = this.sqlConnection;

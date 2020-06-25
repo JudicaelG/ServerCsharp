@@ -21,13 +21,14 @@ namespace Middleware.CMPGE
             this.message = new STCMSG();
         }
 
-        public STCMSG selectByLoginAndPassword(STCMSG _message)
+        public STCMSG selectByLoginAndPassword(STCMSG message)
         {
-            this.message = _message;
-            this.username = _message.User_login;
-            this.password = _message.User_psw;
+            this.message = message;
+            this.username = message.User_login;
+            this.password = message.User_psw;
+            this.email = message.User_email;
 
-            sqlRequest = "SELECT id, username, email FROM Users WHERE(username=" + username + ") AND (password = " + password + ");";
+            sqlRequest = "SELECT id, username, email FROM Users WHERE(username='" + username + "') AND (password = '" + password + "');";
 
             this.message.Data = new object[1] { (object)sqlRequest };
 

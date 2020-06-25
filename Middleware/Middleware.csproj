@@ -45,6 +45,7 @@
     <Compile Include="CAM\CAM.cs" />
     <Compile Include="CMPGE\CMPGE_User.cs" />
     <Compile Include="CTRLWF\Auth_V1.cs" />
+    <Compile Include="CTRLWF\Decipher_V1.cs" />
     <Compile Include="CTRLWF\IExec.cs" />
     <Compile Include="PCS\PCS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,7 +58,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

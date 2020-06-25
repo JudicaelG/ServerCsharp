@@ -23,7 +23,7 @@ namespace Middleware.SVC
         public STCMSG service(STCMSG message)
         {
             int i;
-            if(message.App_token == "12345")
+            if(message.App_token == "1234")
             {
                 if(message.Op_name == "authentifier")
                 {
