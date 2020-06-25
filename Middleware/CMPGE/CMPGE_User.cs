@@ -28,7 +28,7 @@ namespace Middleware.CMPGE
             this.password = message.User_psw;
             this.email = message.User_email;
 
-            sqlRequest = "SELECT id, username, email FROM Users WHERE(username='" + username + "') AND (password = '" + password + "');";
+            sqlRequest = "SELECT id, username, email FROM Users WHERE(email='" + email + "') AND (password = '" + password + "');";
 
             this.message.Data = new object[1] { (object)sqlRequest };
 

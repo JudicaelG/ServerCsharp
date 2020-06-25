@@ -20,6 +20,7 @@ namespace Middleware.CTRLWF
         public STCMSG exec(STCMSG message)
         {
             this.message = message;
+            
             return this.message;
                        
         }
@@ -40,11 +41,14 @@ namespace Middleware.CTRLWF
             {
                 for(int i = 0; i < dataLength; i++)
                 {
-                    output[i] = (char)(data[i] ^ key.ToString()[i % keyLength]);
-                }
+                    output[i] = (char)(data[i] ^ item[i % item.Length]);
+                }             
+
             }
 
+
             return new string(output);
+
 
 
         }

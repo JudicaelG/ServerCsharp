@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,8 @@ namespace Middleware.CTRLWF
                 this.message.Op_info = "Success";
                 this.message.Op_statut = true;
                 this.message.User_token = "1234";
+                this.message.User_email = this.message.Data[1].ToString();
+
             }
             else
             {
