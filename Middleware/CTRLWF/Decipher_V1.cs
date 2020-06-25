@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using WCFContract;
 
@@ -20,12 +21,43 @@ namespace Middleware.CTRLWF
         public STCMSG exec(STCMSG message)
         {
             this.message = message;
-            
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            ParallelOptions po = new ParallelOptions();
+            po.CancellationToken = cts.Token;
+            po.MaxDegreeOfParallelism = Environment.ProcessorCount;
+
+            //lancé une tâche pour cancel la boucle parallel for dans un autre thread
+            Task.Factory.StartNew(() =>
+            {
+                if (this.message.Op_name == "canceldecipher")
+                {
+                    cts.Cancel();
+                }
+            });
+
+            try
+            {
+                Parallel.For(0, this.message.Data.Length, po, x => { 
+                    
+                });
+
+
+            }
+            catch(OperationCanceledException e)
+            {
+                this.message.Op_info = e.Message;
+            }
+            finally
+            {
+                cts.Dispose();
+            }
+
             return this.message;
                        
         }
 
-        private static string XORCipher(string data)
+        private static void XORCipher(string data)
         {
             int dataLength = data.Length;
             var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -42,14 +74,9 @@ namespace Middleware.CTRLWF
                 for(int i = 0; i < dataLength; i++)
                 {
                     output[i] = (char)(data[i] ^ item[i % item.Length]);
-                }             
+                }
 
             }
-
-
-            return new string(output);
-
-
 
         }
     }

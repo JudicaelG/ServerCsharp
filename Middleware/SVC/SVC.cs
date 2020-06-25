@@ -31,6 +31,13 @@ namespace Middleware.SVC
                     this.m_service = new PCS.PCS();
                     this.message = ((PCS.PCS)this.m_service).authentifier(this.message);
                 }
+
+                if(message.Op_name == "decipher")
+                {
+                    this.message = message;
+                    this.m_service = new PCS.PCS();
+                    this.message = ((PCS.PCS)this.m_service).authentifier(this.message);
+                }
             }
             else
             {

@@ -52,6 +52,14 @@ namespace Middleware.CAM
                         this.message = this.exec.exec(this.message);
                         source.TraceEvent(TraceEventType.Stop, 0, "authentifier");
                     }
+
+                    if(message.Op_name == "decipher")
+                    {
+                        source.TraceEvent(TraceEventType.Start, 0, "decipher");
+                        this.exec = new Decipher_V1();
+                        this.message = this.exec.exec(this.message);
+                        source.TraceEvent(TraceEventType.Stop, 0, "decipher");
+                    }
                 }
             }
             source.TraceEvent(TraceEventType.Stop, 0, "dispatching");
