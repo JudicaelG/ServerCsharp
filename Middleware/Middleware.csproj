@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +47,13 @@
     <Compile Include="CAD\CAD.cs" />
     <Compile Include="CAM\CAM.cs" />
     <Compile Include="CMPGE\CMPGE_User.cs" />
+    <Compile Include="Connected Services\proxy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="CTRLWF\Auth_V1.cs" />
+    <Compile Include="CTRLWF\Class1.cs" />
     <Compile Include="CTRLWF\Decipher_V1.cs" />
     <Compile Include="CTRLWF\IExec.cs" />
     <Compile Include="PCS\PCS.cs" />
@@ -61,6 +69,31 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\proxy\AcquisitionService.wsdl" />
+    <None Include="Connected Services\proxy\AcquisitionServiceBean.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\proxy\Middleware.proxy.acquisitionOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\proxy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\proxy\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\proxy\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\proxy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

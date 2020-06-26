@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://facade.communication.cesi.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="AcquisitionService" targetNamespace="http://facade.communication.cesi.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://192.168.0.30:10080/AcquisitionService/AcquisitionServiceBean?xsd=1" namespace="http://facade.communication.cesi.com/" />
+    </xsd:schema>
+  </types>
+  <message name="acquisitionOperation">
+    <part name="parameters" element="tns:acquisitionOperation" />
+  </message>
+  <message name="acquisitionOperationResponse">
+    <part name="parameters" element="tns:acquisitionOperationResponse" />
+  </message>
+  <portType name="AcquisitionEndpoint">
+    <operation name="acquisitionOperation">
+      <input wsam:Action="http://facade.communication.cesi.com/AcquisitionEndpoint/acquisitionOperationRequest" message="tns:acquisitionOperation" />
+      <output wsam:Action="http://facade.communication.cesi.com/AcquisitionEndpoint/acquisitionOperationResponse" message="tns:acquisitionOperationResponse" />
+    </operation>
+  </portType>
+  <binding name="AcquisitionPortBinding" type="tns:AcquisitionEndpoint">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="acquisitionOperation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="AcquisitionService">
+    <port name="AcquisitionPort" binding="tns:AcquisitionPortBinding">
+      <soap:address location="http://192.168.0.30:10080/AcquisitionService/AcquisitionServiceBean" />
+    </port>
+  </service>
+</definitions>

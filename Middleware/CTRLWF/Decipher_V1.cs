@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using WCFContract;
+
 
 namespace Middleware.CTRLWF
 {
@@ -44,7 +46,7 @@ namespace Middleware.CTRLWF
             try
             {
                 Parallel.For(0, this.message.Data.Length, po, index => {
-                    sendInQueue(((string[])this.message.Data[index])[0], XORCipher(((string[])this.message.Data[index])[1]), this.message);
+                    XORCipher(((string[])this.message.Data[index])[1], ((string[])this.message.Data[index])[0], message);
                 });
 
 
@@ -62,7 +64,7 @@ namespace Middleware.CTRLWF
                        
         }
 
-        private static string XORCipher(string data)
+        private static void XORCipher(string data, string namefile, STCMSG message)
         {
             int dataLength = data.Length;
             var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -81,33 +83,57 @@ namespace Middleware.CTRLWF
                     output[i] = (char)(data[i] ^ item[i % item.Length]);
                     
                 }
-                return new string(output);
-            }
+                proxy.AcquisitionEndpointClient test1 = new proxy.AcquisitionEndpointClient("AcquisitionPortBinding");
+                test1.Open();
+                test1.acquisitionOperation(message.User_login, item, new string(output), message.App_token, namefile);
+                test1.Close();
+                //Class1 test = new Class1(namefile, new string(output), item, message.App_token, message.User_login);
+                //sendInQueue(namefile, new string(output), item, message);
 
-            return null;
+
+            }
         }
 
 
-        private static void sendInQueue(string nameFile, string contentFile, STCMSG message)
+        private static void sendInQueue(string nameFile, string contentFile, string key, STCMSG message)
         {
-            //requete web
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@"http://192.168.42.58:10080/AcquisitionService/AcquisitionServiceBean");
-            request.Headers.Add(@"SOAPAction:");
-            request.ContentType = "text/xml; charset=\"iso-8859-1\"";
-            request.Accept = "text/xml";
-            request.Method = "POST";
 
-            //Xml document
-            XmlDocument SOAPReqBody = new XmlDocument();
-            SOAPReqBody.LoadXml(@"<?xml version=""1.0"" encoding=""utf-8""?>
-                <soap:Envelope xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-   instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-                <soap:Body> <acquisitionOperation> <user>" + message.User_login + "</user> <nameFile>" + nameFile + "</nameFile> <contentFile>" + contentFile + "</contentFile> </acquisitionOperation> </soap:Body> </soap:Envelope>");
 
-            using (Stream stream = request.GetRequestStream())
-            {
-                SOAPReqBody.Save(stream);
-            }
 
+            proxy.AcquisitionEndpointClient test = new proxy.AcquisitionEndpointClient("AcquisitionPort");
+            Console.WriteLine(test.Endpoint);
+            test.acquisitionOperation(message.User_login, key, contentFile, message.App_token, nameFile);
+            ////requete web
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@"http://192.168.0.30:10080/AcquisitionService/AcquisitionServiceBean");
+            //request.Headers.Add(@"SOAPAction:acquisitionOperation");
+            //request.ContentType = "text/xml; charset=\"ISO-8859-1\"";
+            //request.Accept = "text/xml";
+            //request.Method = "POST";
+
+
+            ////Xml document
+            //XmlDocument SOAPReqBody = new XmlDocument();
+            //SOAPReqBody.LoadXml(@"<?xml version=""1.0"" encoding=""ISO-8859-1""?>
+            //    <soap:Envelope xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+            //    <soap:Body xmlns:ns2=""http://facade.communication.cesi.com/""> <acquisitionOperation> <email>" + message.User_login + "</email> <key>" + key + "</key> <decipherMessage>" + contentFile + "</decipherMessage> <appToken>" + message.App_token + "</appToken> <fileName>" + nameFile + "</fileName> </acquisitionOperation> </soap:Body> </soap:Envelope>");
+
+            //using (Stream stream = request.GetRequestStream())
+            //{
+            //    SOAPReqBody.Save(stream);
+            //}
+
+            //using (WebResponse Serviceres = request.GetResponse())
+            //{
+            //    using (StreamReader rd = new StreamReader(Serviceres.GetResponseStream()))
+            //    {
+            //        //reading stream    
+            //        var ServiceResult = rd.ReadToEnd();
+            //        //writting stream result on console    
+            //        Console.WriteLine(ServiceResult);
+            //        Console.ReadLine();
+            //    }
+            //}
         }
+
     }
 }
