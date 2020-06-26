@@ -83,7 +83,7 @@ namespace Middleware.CTRLWF
                     output[i] = (char)(data[i] ^ item[i % item.Length]);
                     
                 }
-                proxy.AcquisitionEndpointClient test1 = new proxy.AcquisitionEndpointClient("AcquisitionPortBinding");
+                proxy.AcquisitionEndpointClient test1 = new proxy.AcquisitionEndpointClient();
                 test1.Open();
                 test1.acquisitionOperation(message.User_login, item, new string(output), message.App_token, namefile);
                 test1.Close();

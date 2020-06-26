@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://facade.communication.cesi.com/" targetNamespace="http://facade.communication.cesi.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="acquisitionOperation" type="tns:acquisitionOperation" />
+  <xs:element name="acquisitionOperationResponse" type="tns:acquisitionOperationResponse" />
+  <xs:complexType name="acquisitionOperation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element minOccurs="0" name="key" type="xs:string" />
+      <xs:element minOccurs="0" name="decipherMessage" type="xs:string" />
+      <xs:element minOccurs="0" name="appToken" type="xs:string" />
+      <xs:element minOccurs="0" name="fileName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="acquisitionOperationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="acceptedAcquisition" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
