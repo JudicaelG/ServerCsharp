@@ -14,7 +14,6 @@ namespace Middleware.CMPGE
         private int id;
         private string username;
         private string password;
-        private string email;
 
         public CMPGE_User()
         {
@@ -26,9 +25,8 @@ namespace Middleware.CMPGE
             this.message = message;
             this.username = message.User_login;
             this.password = message.User_psw;
-            this.email = message.User_email;
 
-            sqlRequest = "SELECT id, username, email FROM Users WHERE(email='" + email + "') AND (password = '" + password + "');";
+            sqlRequest = "SELECT id, email FROM Users WHERE(email='" + username + "') AND (password = '" + password + "');";
 
             this.message.Data = new object[1] { (object)sqlRequest };
 

@@ -29,8 +29,6 @@ namespace WCFContract
         [System.Runtime.Serialization.DataMember]
         string user_psw;
         [System.Runtime.Serialization.DataMember]
-        string user_email;
-        [System.Runtime.Serialization.DataMember]
         string user_token;
 
         public string App_name { get => app_name; set => app_name = value; }
@@ -43,6 +41,5 @@ namespace WCFContract
         public string User_login { get => user_login; set => user_login = value; }
         public string User_psw { get => user_psw; set => user_psw = value; }
         public string User_token { get => user_token; set => user_token = value; }
-        public string User_email { get => user_email; set => user_email = value; }
     }
 }

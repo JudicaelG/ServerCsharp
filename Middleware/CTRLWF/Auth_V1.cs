@@ -38,7 +38,6 @@ namespace Middleware.CTRLWF
                 this.message.Op_statut = true;
                 this.message.User_token = "1234";
                 this.message.User_login = ((System.Data.DataTable)this.message.Data[0]).Rows[0][1].ToString();
-                this.message.User_email = ((System.Data.DataTable)this.message.Data[0]).Rows[0][2].ToString();
 
             }
             else
