@@ -56,6 +56,7 @@
     <Compile Include="CTRLWF\Class1.cs" />
     <Compile Include="CTRLWF\Decipher_V1.cs" />
     <Compile Include="CTRLWF\IExec.cs" />
+    <Compile Include="CTRLWF\Receive_Secret_Information_V1.cs" />
     <Compile Include="PCS\PCS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SVC\SVC.cs" />

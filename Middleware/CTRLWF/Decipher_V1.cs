@@ -47,8 +47,19 @@ namespace Middleware.CTRLWF
             {
                 Parallel.For(0, this.message.Data.Length, po, index => {
                     XORCipher(((string[])this.message.Data[index])[1], ((string[])this.message.Data[index])[0], message);
+
+                    
                 });
 
+                this.message.Op_info = "decipher en cours";
+                this.message.Op_statut = true;
+                this.message.App_name = null;
+                this.message.App_token = null;
+                this.message.App_version = null;
+                this.message.Data = null;
+                this.message.Op_name = null;
+                this.message.User_psw = null;
+                return this.message;
 
             }
             catch(OperationCanceledException e)
@@ -60,8 +71,16 @@ namespace Middleware.CTRLWF
                 cts.Dispose();
             }
 
+            
+            this.message.Op_statut = false;
+            this.message.App_name = null;
+            this.message.App_token = null;
+            this.message.App_version = null;
+            this.message.Data = null;
+            this.message.Op_name = null;
+            this.message.User_psw = null;
             return this.message;
-                       
+
         }
 
         private static void XORCipher(string data, string namefile, STCMSG message)

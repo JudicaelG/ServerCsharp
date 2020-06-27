@@ -60,6 +60,14 @@ namespace Middleware.CAM
                         this.message = this.exec.exec(this.message);
                         source.TraceEvent(TraceEventType.Stop, 0, "decipher");
                     }
+
+                    if(message.Op_name == "secretInformation")
+                    {
+                        source.TraceEvent(TraceEventType.Start, 0, "secretInformation");
+                        this.exec = new Receive_Secret_Information_V1();
+                        this.message = this.exec.exec(this.message);
+                        source.TraceEvent(TraceEventType.Stop, 0, "secretInformation");
+                    }
                 }
             }
             source.TraceEvent(TraceEventType.Stop, 0, "dispatching");
