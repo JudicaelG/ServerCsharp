@@ -14,6 +14,7 @@ namespace Server
 
         private static ServiceHost host;
 
+
         static void Main(string[] args)
         {
             Program.init_server();
@@ -23,6 +24,7 @@ namespace Server
         {
             int i;
             Program.host = new ServiceHost(typeof(SVC));
+
             try
             {
                 host.Open();

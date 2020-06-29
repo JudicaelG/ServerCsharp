@@ -26,10 +26,10 @@ namespace Middleware.CTRLWF
             this.message = message;
             int count = -1;
 
-            this.sql = new CMPGE.CMPGE_User();
-            this.message = this.sql.insertResults(this.message);
-            this.message.Data = new object[2] { this.message.Data[0], (object)"result" };
-            this.message = this.cad.setRows(this.message);
+            //this.sql = new CMPGE.CMPGE_User();
+            //this.message = this.sql.insertResults(this.message);
+            //this.message.Data = new object[2] { this.message.Data[0], (object)"result" };
+            //this.message = this.cad.setRows(this.message);
 
             this.message.Op_info = "Success";
             this.message.Op_statut = true;
