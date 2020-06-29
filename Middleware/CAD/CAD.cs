@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WCFContract;
 using System.Data.SqlClient;
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace Middleware.CAD
 {
@@ -41,8 +42,19 @@ namespace Middleware.CAD
             this.dataAdapter.SelectCommand = this.sqlCommand;
             this.dataAdapter.Fill(this.dataSet, (string)_message.Data[1]);
             this.message.Data = new object[1] { (object)this.dataSet.Tables[0] };
-
+            
             return this.message;
         }
+
+        public STCMSG setRows(STCMSG message) 
+        {
+            this.message = message;
+            this.sqlRequest = (string)message.Data[0];
+            this.sqlCommand.CommandText = this.sqlRequest;
+            this.dataAdapter.InsertCommand = this.sqlCommand;
+
+            return this.message;  
+        }
+        
     }
 }

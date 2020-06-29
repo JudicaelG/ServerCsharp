@@ -15,14 +15,8 @@ namespace WCFContract
         /// </summary>
         /// <param name="msg">Message</param>
         /// <returns>Tickets data</returns>
-        [System.ServiceModel.OperationContract]
+        [OperationContract]
         STCMSG service(STCMSG msg);
 
-    }
-
-    public interface IServerCallback
-    {
-        [OperationContract(IsOneWay = true)]
-        void Files();
     }
 }

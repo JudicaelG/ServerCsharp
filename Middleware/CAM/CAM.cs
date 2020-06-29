@@ -54,12 +54,12 @@ namespace Middleware.CAM
                         source.TraceEvent(TraceEventType.Stop, 0, "authentifier");
                     }
 
-                    if(message.Op_name == "decipher")
+                    if(message.Op_name == "decypher")
                     {
-                        source.TraceEvent(TraceEventType.Start, 0, "decipher");
+                        source.TraceEvent(TraceEventType.Start, 0, "decypher");
                         this.exec = new Decipher_V1();
                         this.message = this.exec.exec(this.message);
-                        source.TraceEvent(TraceEventType.Stop, 0, "decipher");
+                        source.TraceEvent(TraceEventType.Stop, 0, "decypher");
                     }
 
                     if(message.Op_name == "secretInformation")

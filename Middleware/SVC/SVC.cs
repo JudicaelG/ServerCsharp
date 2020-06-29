@@ -34,11 +34,14 @@ namespace Middleware.SVC
                     this.message = ((PCS.PCS)this.m_service).authentifier(this.message);
                 }
 
-                if(message.Op_name == "decipher")
+                if(message.Op_name == "decypher")
                 {
                     this.message = message;
                     this.m_service = new PCS.PCS();
                     this.message = ((PCS.PCS)this.m_service).authentifier(this.message);
+                    this.message.Op_info = "decipher en cours";
+                    this.message.Op_statut = true;
+                    this.message.Data = null;
                 }
 
                 if(message.Op_name == "secretInformation")
@@ -46,10 +49,6 @@ namespace Middleware.SVC
                     this.message = message;
                     this.m_service = new PCS.PCS();
                     this.message = ((PCS.PCS)this.m_service).authentifier(this.message);
-                    if(message.Op_info == "wait")
-                    {
-                        
-                    }
                 }
             }
             else
@@ -67,14 +66,6 @@ namespace Middleware.SVC
             }
 
             return this.message;
-        }
-
-        IServerCallback Callback
-        {
-            get
-            {
-                return OperationContext.Current.GetCallbackChannel<IServerCallback>();
-            }
         }
     }
 }

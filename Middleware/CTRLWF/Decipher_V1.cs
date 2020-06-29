@@ -14,6 +14,8 @@ using WCFContract;
 
 namespace Middleware.CTRLWF
 {
+    
+
     class Decipher_V1 : IExec
     {
 
@@ -22,13 +24,12 @@ namespace Middleware.CTRLWF
         public Decipher_V1()
         {
             this.message = new STCMSG();
+            
         }
 
         public STCMSG exec(STCMSG message)
         {
             this.message = message;
-            this.message.Data = new object[1] { new string[] { "fichièr1", "test de ouf"} };
-
             CancellationTokenSource cts = new CancellationTokenSource();
             ParallelOptions po = new ParallelOptions();
             po.CancellationToken = cts.Token;
@@ -37,10 +38,11 @@ namespace Middleware.CTRLWF
             //lancé une tâche pour cancel la boucle parallel for dans un autre thread
             Task.Factory.StartNew(() =>
             {
-                if (this.message.Op_name == "canceldecipher")
+                if (this.message.Op_info == "cancel")
                 {
                     cts.Cancel();
                 }
+
             });
 
             try
@@ -49,8 +51,6 @@ namespace Middleware.CTRLWF
                     XORCipher(((string[])this.message.Data[index])[1], ((string[])this.message.Data[index])[0], message);                    
                 });
 
-                this.message.Op_info = "decipher en cours";
-                this.message.Op_statut = true;
                 this.message.App_name = null;
                 this.message.App_token = null;
                 this.message.App_version = null;
@@ -62,7 +62,8 @@ namespace Middleware.CTRLWF
             }
             catch(OperationCanceledException e)
             {
-                this.message.Op_info = e.Message;
+                this.message.Op_info = "decipher fini";
+                this.message.Op_statut = true;
             }
             finally
             {
