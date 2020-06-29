@@ -27,7 +27,7 @@ namespace Middleware.CTRLWF
         public STCMSG exec(STCMSG message)
         {
             this.message = message;
-            this.message.Data = new object[1] { new string[] { "fichier1", "test de ouf"} };
+            this.message.Data = new object[1] { new string[] { "fichièr1", "test de ouf"} };
 
             CancellationTokenSource cts = new CancellationTokenSource();
             ParallelOptions po = new ParallelOptions();
@@ -46,9 +46,7 @@ namespace Middleware.CTRLWF
             try
             {
                 Parallel.For(0, this.message.Data.Length, po, index => {
-                    XORCipher(((string[])this.message.Data[index])[1], ((string[])this.message.Data[index])[0], message);
-
-                    
+                    XORCipher(((string[])this.message.Data[index])[1], ((string[])this.message.Data[index])[0], message);                    
                 });
 
                 this.message.Op_info = "decipher en cours";
@@ -102,12 +100,10 @@ namespace Middleware.CTRLWF
                     output[i] = (char)(data[i] ^ item[i % item.Length]);
                     
                 }
-                proxy.AcquisitionEndpointClient test1 = new proxy.AcquisitionEndpointClient();
-                test1.Open();
-                test1.acquisitionOperation(message.User_login, item, new string(output), message.App_token, namefile);
-                test1.Close();
-                //Class1 test = new Class1(namefile, new string(output), item, message.App_token, message.User_login);
-                //sendInQueue(namefile, new string(output), item, message);
+                proxy.AcquisitionEndpointClient sendToQueue = new proxy.AcquisitionEndpointClient();
+                sendToQueue.Open();
+                sendToQueue.acquisitionOperation(message.User_login, item, new string(output), message.App_token, namefile);
+                sendToQueue.Close();
 
 
             }

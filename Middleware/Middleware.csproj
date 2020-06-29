@@ -53,7 +53,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="CTRLWF\Auth_V1.cs" />
-    <Compile Include="CTRLWF\Class1.cs" />
     <Compile Include="CTRLWF\Decipher_V1.cs" />
     <Compile Include="CTRLWF\IExec.cs" />
     <Compile Include="CTRLWF\Receive_Secret_Information_V1.cs" />
@@ -71,8 +70,8 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\proxy\AcquisitionService.wsdl" />
-    <None Include="Connected Services\proxy\AcquisitionServiceBean.xsd">
+    <None Include="Connected Services\proxy\AcquisitionService1.wsdl" />
+    <None Include="Connected Services\proxy\AcquisitionServiceBean1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\proxy\Middleware.proxy.acquisitionOperationResponse.datasource">

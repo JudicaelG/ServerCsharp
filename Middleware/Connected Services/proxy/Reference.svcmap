@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.0.30:10080/AcquisitionService/AcquisitionServiceBean?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.0.29:10080/AcquisitionService/AcquisitionServiceBean?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AcquisitionService.wsdl" MetadataType="Wsdl" ID="3c7f8716-e936-4946-b729-c79a6e14e0dc" SourceId="1" SourceUrl="http://192.168.0.30:10080/AcquisitionService/AcquisitionServiceBean?wsdl" />
-    <MetadataFile FileName="AcquisitionServiceBean.xsd" MetadataType="Schema" ID="eca507df-9976-449e-9a0c-f4da8f6953d8" SourceId="1" SourceUrl="http://192.168.0.30:10080/AcquisitionService/AcquisitionServiceBean?xsd=1" />
+    <MetadataFile FileName="AcquisitionServiceBean1.xsd" MetadataType="Schema" ID="b632acd0-636e-4860-a1b2-30bf02dc6096" SourceId="1" SourceUrl="http://192.168.0.29:10080/AcquisitionService/AcquisitionServiceBean?xsd=1" />
+    <MetadataFile FileName="AcquisitionService1.wsdl" MetadataType="Wsdl" ID="7965b8a5-7463-4a5b-ac49-0f14a95d9448" SourceId="1" SourceUrl="http://192.168.0.29:10080/AcquisitionService/AcquisitionServiceBean?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

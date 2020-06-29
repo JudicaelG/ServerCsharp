@@ -12,6 +12,7 @@ namespace Middleware.CAM
     class CAM
     {
         private static TraceSource source = new TraceSource("CAM");
+        
         private static CAM instance = null;
         private static readonly object padlock = new object();
         private STCMSG message;

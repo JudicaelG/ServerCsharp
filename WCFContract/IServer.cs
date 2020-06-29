@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,5 +17,12 @@ namespace WCFContract
         /// <returns>Tickets data</returns>
         [System.ServiceModel.OperationContract]
         STCMSG service(STCMSG msg);
+
+    }
+
+    public interface IServerCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void Files();
     }
 }

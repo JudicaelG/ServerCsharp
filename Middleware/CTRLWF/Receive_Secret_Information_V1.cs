@@ -19,6 +19,7 @@ namespace Middleware.CTRLWF
         public STCMSG exec(STCMSG message)
         {
             this.message = message;
+            
 
 
             this.message.Op_info = "Success";
