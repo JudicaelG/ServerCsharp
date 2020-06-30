@@ -6,6 +6,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -35,7 +36,7 @@ namespace Middleware.CTRLWF
             ParallelOptions po = new ParallelOptions();
             po.CancellationToken = cts.Token;
             po.MaxDegreeOfParallelism = Environment.ProcessorCount;
-
+            Encoding iso = Encoding.GetEncoding("ISO-8859-1");
             //lancé une tâche pour cancel la boucle parallel for dans un autre thread
             Task.Factory.StartNew(() =>
             {
@@ -49,7 +50,8 @@ namespace Middleware.CTRLWF
             try
             {
                 Parallel.For(0, this.message.Data.Length, po, index => {
-                    XORCipher(((string[])this.message.Data[index])[1], ((string[])this.message.Data[index])[0], message);                    
+                    byte[] textByte = iso.GetBytes(((string[])this.message.Data[index])[1]);
+                    XORCipher(textByte, ((string[])this.message.Data[index])[0], message);                    
                 });
 
                 this.message.App_name = null;
@@ -83,13 +85,13 @@ namespace Middleware.CTRLWF
 
         }
 
-        private static void XORCipher(string data, string namefile, STCMSG message)
+        private static void XORCipher(byte[] data, string namefile, STCMSG message)
         {
             int dataLength = data.Length;
             var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var key = alphabet.Select(x => x.ToString());
             int keysize = 4;
-            char[] output = new char[dataLength];
+            byte[] output = new byte[dataLength];
             int keyLength = key.Count();
 
             for (int i = 0; i < keysize - 1; i++)
@@ -97,31 +99,49 @@ namespace Middleware.CTRLWF
 
             foreach(var item in key)
             {
+                byte[] keyBytes = Encoding.UTF8.GetBytes(item);
                 for(int i = 0; i < dataLength; i++)
                 {
-                    output[i] = (char)(data[i] ^ item[i % item.Length]);
+                    //output[i] = (char)(data[i] ^ item[i % item.Length]);
+                    output[i] = (byte)(data[i] ^ keyBytes[i % keyBytes.Length]);
                     
                 }
-                string str = new string(output);
+                //string str = new string(output);
                 Encoding iso = Encoding.GetEncoding("ISO-8859-1");
-                Encoding utf8 = Encoding.UTF8;
-                byte[] utfbytes = utf8.GetBytes(str);
-                byte[] isoBytes = Encoding.Convert(utf8, iso, utfbytes);
-                string textFinal = iso.GetString(isoBytes);
-                string stringWanted = textFinal.Replace("<", "&lt;")
-                                                   .Replace( "&", "&amp;")
-                                                   .Replace( ">", "&gt;")
-                                                   .Replace("\"", "&quot;")
-                                                   .Replace("'", "&apos;");
+                //Encoding utf8 = Encoding.UTF8;
+                Encoding unicode = Encoding.Unicode;
+                //byte[] utfbytes = utf8.GetBytes(str);
+                //byte[] isoBytes = Encoding.Convert(utf8, iso, utfbytes);
+                //string textFinal = iso.GetString(isoBytes);
+                //string textFinal = Encoding.Unicode.GetString(output);
+                //byte[] isoBytes = Encoding.Convert(unicode, iso, output);
+                string textFinal = RemoveInvalidXmlChars(iso.GetString(output));
+
+                //string correctedText = Regex.Replace(textFinal, @"[^\u0000-\u007f]", string.Empty);
+                //string stringWanted = correctedText.Replace("<", "&lt;")
+                //                                   .Replace("&", "&amp;")
+                //                                   .Replace(">", "&gt;")
+                //                                   .Replace("\"", "&quot;")
+                //                                      .Replace("'", "&apos;")
+                //                                      .Replace("\u000f", "")
+                //                                      .Replace("\u0002", "")
+                //                                      .Replace("\u007f", "");
+            
+
                 proxy.AcquisitionEndpointClient sendToQueue = new proxy.AcquisitionEndpointClient();
                 sendToQueue.Open();
-                sendToQueue.acquisitionOperation(message.User_login, item, stringWanted.ToString(), message.App_token, namefile);
+                sendToQueue.acquisitionOperation(message.User_login, item, textFinal, message.App_token, namefile);
                 sendToQueue.Close();
 
 
             }
         }
 
+        static string RemoveInvalidXmlChars(string text)
+        {
+            var validXmlChars = text.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray();
+            return new string(validXmlChars);
+        }
 
         private static void sendInQueue(string nameFile, string contentFile, string key, STCMSG message)
         {
