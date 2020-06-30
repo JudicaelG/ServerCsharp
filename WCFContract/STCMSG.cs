@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace WCFContract
 {
     [DataContract]
+    [KnownType(typeof(string[]))]
     public struct STCMSG
     {
         [System.Runtime.Serialization.DataMember]
@@ -16,7 +17,7 @@ namespace WCFContract
         string app_token;
         [System.Runtime.Serialization.DataMember]
         string app_version;
-        [System.Runtime.Serialization.DataMember]
+        [System.Runtime.Serialization.DataMember]        
         object[] data;
         [System.Runtime.Serialization.DataMember]
         string op_info;

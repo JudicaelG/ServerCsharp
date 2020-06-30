@@ -48,11 +48,13 @@ namespace Middleware.CAD
 
         public STCMSG setRows(STCMSG message) 
         {
+
             this.message = message;
             this.sqlRequest = (string)message.Data[0];
+            this.sqlCommand.Connection.Open();
             this.sqlCommand.CommandText = this.sqlRequest;
-            this.dataAdapter.InsertCommand = this.sqlCommand;
-
+            this.sqlCommand.ExecuteReader();
+            this.sqlCommand.Connection.Close();
             return this.message;  
         }
         

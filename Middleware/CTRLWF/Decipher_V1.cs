@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml;
 using WCFContract;
 
@@ -101,9 +102,20 @@ namespace Middleware.CTRLWF
                     output[i] = (char)(data[i] ^ item[i % item.Length]);
                     
                 }
+                string str = new string(output);
+                Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+                Encoding utf8 = Encoding.UTF8;
+                byte[] utfbytes = utf8.GetBytes(str);
+                byte[] isoBytes = Encoding.Convert(utf8, iso, utfbytes);
+                string textFinal = iso.GetString(isoBytes);
+                string stringWanted = textFinal.Replace("<", "&lt;")
+                                                   .Replace( "&", "&amp;")
+                                                   .Replace( ">", "&gt;")
+                                                   .Replace("\"", "&quot;")
+                                                   .Replace("'", "&apos;");
                 proxy.AcquisitionEndpointClient sendToQueue = new proxy.AcquisitionEndpointClient();
                 sendToQueue.Open();
-                sendToQueue.acquisitionOperation(message.User_login, item, new string(output), message.App_token, namefile);
+                sendToQueue.acquisitionOperation(message.User_login, item, stringWanted.ToString(), message.App_token, namefile);
                 sendToQueue.Close();
 
 
