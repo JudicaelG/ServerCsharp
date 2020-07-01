@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CAD\CAD.cs" />
     <Compile Include="CAM\CAM.cs" />
+    <Compile Include="CMPGE\CMPGE_Files.cs" />
     <Compile Include="CMPGE\CMPGE_User.cs" />
     <Compile Include="Connected Services\proxy\Reference.cs">
       <AutoGen>True</AutoGen>

@@ -19,7 +19,11 @@ namespace Middleware.CTRLWF
             this.message = new STCMSG();
             this.cad = new CAD.CAD();
         }
-        
+        /// <summary>
+        /// Vérifie si l'utilisateur est présent en base de données
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>Success si l'utilisateur existe, false si l'utilisateur n'existe pas</returns>
         public STCMSG exec(STCMSG message)
         {
             int count;

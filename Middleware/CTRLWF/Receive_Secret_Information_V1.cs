@@ -12,7 +12,7 @@ namespace Middleware.CTRLWF
     class Receive_Secret_Information_V1 : IExec
     {
         STCMSG message;
-        private CMPGE.CMPGE_User sql;
+        private CMPGE.CMPGE_Files sql;
         private CAD.CAD cad;
 
         public Receive_Secret_Information_V1()
@@ -21,11 +21,16 @@ namespace Middleware.CTRLWF
             this.cad = new CAD.CAD();
         }
 
+        /// <summary>
+        /// Reçois le triplet de JEE et traite la réponse pour mettre dans la bdd pour renvoyé au client
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public STCMSG exec(STCMSG message)
         {
             this.message = message;
 
-            this.sql = new CMPGE.CMPGE_User();
+            this.sql = new CMPGE.CMPGE_Files();
             this.message = this.sql.insertResults(this.message);
             this.message.Data = new object[2] { this.message.Data[0], (object)"result" };
             this.message = this.cad.setRows(this.message);

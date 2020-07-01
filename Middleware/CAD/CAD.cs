@@ -34,6 +34,11 @@ namespace Middleware.CAD
             this.sqlCommand.Connection = this.sqlConnection;
         }
 
+        /// <summary>
+        /// obtient le resulat d'une requête SQL select
+        /// </summary>
+        /// <param name="_message"></param>
+        /// <returns></returns>
         public STCMSG getRows(STCMSG _message)
         {
             this.message = _message;
@@ -46,6 +51,11 @@ namespace Middleware.CAD
             return this.message;
         }
 
+        /// <summary>
+        /// insert dans la base de donnée une requête SQL
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public STCMSG setRows(STCMSG message) 
         {
 

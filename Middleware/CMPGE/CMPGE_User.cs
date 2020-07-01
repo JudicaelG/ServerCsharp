@@ -20,6 +20,12 @@ namespace Middleware.CMPGE
             this.message = new STCMSG();
         }
 
+
+        /// <summary>
+        /// Créer la requête sql pour rechercher un utilisateur
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public STCMSG selectByLoginAndPassword(STCMSG message)
         {
             this.message = message;
@@ -33,15 +39,6 @@ namespace Middleware.CMPGE
             return this.message;
         }
 
-        public STCMSG insertResults(STCMSG message)
-        {
-            this.message = message;
-            this.message.Data = new object[] { new string[] { "AAAA", "le super texte dechiffrer", "fichier1", "les valeurs de ouf" }};
-
-            sqlRequest = "INSERT INTO Results(username, secretKey, secretInformation, fileName, PDF) VALUES ('" + this.message.User_login + "','" + ((string[])this.message.Data[0])[0] + "','" + ((string[])this.message.Data[0])[1] + "','" + ((string[])this.message.Data[0])[2] + "','" + ((string[])this.message.Data[0])[3] + "');";
-
-            this.message.Data = new object[1] { (object)sqlRequest };
-            return this.message;
-        }
+        
     }
 }

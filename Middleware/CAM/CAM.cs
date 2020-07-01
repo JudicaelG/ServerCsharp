@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using WCFContract;
@@ -37,7 +38,11 @@ namespace Middleware.CAM
                 }
             }
         }
-
+        /// <summary>
+        /// dispatch le message pour l'envoyer au bon contrôleur
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public STCMSG dispatching(STCMSG message)
         {
             source.TraceEvent(TraceEventType.Start, 0, "dispatching");
@@ -68,6 +73,14 @@ namespace Middleware.CAM
                         this.exec = new Receive_Secret_Information_V1();
                         this.message = this.exec.exec(this.message);
                         source.TraceEvent(TraceEventType.Stop, 0, "secretInformation");
+                    }
+
+                    if(message.Op_name == "receiveInformation")
+                    {
+                        source.TraceEvent(TraceEventType.Start, 0, "receiveInformation");
+                        this.exec = new Receive_French_Files_V1();
+                        this.message = this.exec.exec(this.message);
+                        source.TraceEvent(TraceEventType.Stop, 0, "receiveInformation");
                     }
                 }
             }
