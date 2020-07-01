@@ -60,6 +60,7 @@ namespace Middleware.CTRLWF
                 });
 
                 this.message.Op_info = "decypher fini";
+                this.message.Op_statut = false;
                 this.message.App_name = null;
                 this.message.App_token = null;
                 this.message.App_version = null;
@@ -79,8 +80,6 @@ namespace Middleware.CTRLWF
                 cts.Dispose();
             }
 
-            
-            this.message.Op_statut = false;
             this.message.App_name = null;
             this.message.App_token = null;
             this.message.App_version = null;
