@@ -23,10 +23,10 @@ namespace WCFContract
 
     }
 
-    [ServiceContract (Name = "IServer")]
+    [ServiceContract]
     public interface IServerAync
     {
-        [OperationContract]
+        [OperationContract(AsyncPattern = true)]
         Task<STCMSG> serviceAsync(STCMSG message);
     }
 }

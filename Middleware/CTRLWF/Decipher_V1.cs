@@ -59,6 +59,7 @@ namespace Middleware.CTRLWF
                     XORCipher(textByte, ((string[])this.message.Data[index])[0], message);                    
                 });
 
+                this.message.Op_info = "decypher fini";
                 this.message.App_name = null;
                 this.message.App_token = null;
                 this.message.App_version = null;
@@ -70,7 +71,7 @@ namespace Middleware.CTRLWF
             }
             catch(OperationCanceledException e)
             {
-                this.message.Op_info = "decipher fini";
+                this.message.Op_info = "decypher fini";
                 this.message.Op_statut = true;
             }
             finally
